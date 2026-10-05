@@ -12,7 +12,7 @@
 -- otherwise the screen above, then Find (last saved position as a QR code for a phone's map)
 -- and Logbook.
 
-local VERSION = "1.1.2"
+local VERSION = "1.1.3"
 local DIR = "/WIDGETS/FPVDash/"
 
 -- the Theme setting's choices in the order EdgeTX stores them (1-based); add new ones at the end

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3 (2026-10-04)
+
+- **Glass Cockpit** no longer stops with "ERROR in function" on EdgeTX 3.0. EdgeTX 3.0 runs every property function even while its object is hidden, and the empty annunciator slots had nothing to return. Nothing changes on EdgeTX 2.x. Fixed by Enno Lübbers ([#1](https://github.com/vcazan/fpvdash/pull/1)).
+
 ## 1.1.2 (2026-09-30)
 
 - **Glass Cockpit**: opening the GPS view or the link lost screen without a GPS position no longer restarts the radio into Emergency mode. EdgeTX 2.12.4 crashes when a line whose points come from a function is hidden before it has points, which the plan view's line home and lost marker did; they're shown and hidden through their container now. Update if you use Glass Cockpit, the default.
