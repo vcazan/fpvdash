@@ -129,16 +129,20 @@ local function build(w)
     for i = 1, BLOCKS do
       local has = function() return bv[i] ~= nil end
       local warn = function() return bv[i] ~= nil and bv[i].sev == "warn" end
+      -- EdgeTX 3.0 evaluates these callbacks even while the block is hidden, so bv[i] may be nil
+      local bx = function() return bv[i] and bv[i].x or P(20) end
+      local bw = function() return bv[i] and bv[i].w or P(100) end
       add(list, {
         rect(P(20), y, P(100), blockH, C.red, { rounded = max(1, P(2)), visible = warn,
-          pos = function() return bv[i].x, y end, size = function() return bv[i].w, blockH end }),
+          pos = function() return bx(), y end, size = function() return bw(), blockH end }),
         { type = "rectangle", x = P(20), y = y, w = P(100), h = blockH, filled = false, thickness = border,
           rounded = max(1, P(2)), visible = function() return bv[i] ~= nil and bv[i].sev ~= "warn" end,
-          color = function() return bv[i].border end,
-          pos = function() return bv[i].x, y end, size = function() return bv[i].w, blockH end },
+          color = function() return bv[i] and bv[i].border or C.red end,
+          pos = function() return bx(), y end, size = function() return bw(), blockH end },
         { type = "label", x = P(20), y = ty, font = BOLD, visible = has,
-          text = function() return bv[i].text end, color = function() return bv[i].color end,
-          pos = function() return bv[i].x + border + blockPad, ty end },
+          text = function() return bv[i] and bv[i].text or "" end,
+          color = function() return bv[i] and bv[i].color or C.red end,
+          pos = function() return bx() + border + blockPad, ty end },
       })
     end
     return bv
